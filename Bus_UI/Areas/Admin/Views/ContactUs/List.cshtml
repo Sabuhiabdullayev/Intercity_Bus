@@ -1,0 +1,28 @@
+﻿@model List<ContactUsListView>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="text-center">ContactUs All List</h4>
+
+<table class="table table-bordered">
+    <tr>
+		<th>#</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Subject</th>
+		<th>Content</th>
+		<th>Del</th>
+    </tr>
+	@foreach(var x in Model){
+		 <tr>
+		<th>@x.Id</th>
+		<th>@x.Name</th>
+		<th>@x.Email</th>
+		<th>@x.Subject</th>
+		<th>@x.Content</th>
+		<th><a href="/Admin/ContactUs/Delete/@x.Id" class="btn btn-danger">Del</a></th>
+    </tr>
+	}
+</table>

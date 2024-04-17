@@ -1,0 +1,236 @@
+﻿@model DeparturePriceView
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+  <link rel="stylesheet" href="~/css/to-go.css">
+  <link rel="stylesheet" href="~/css/chek.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+   <div class="row">
+					<div class="col-md-12">
+						<div class="search-wrap-1 ftco-animate">
+							<form asp-action="Search" asp-controller="Passengers" method="get">
+		        		<div class="row">
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haradan</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		                     <input type="text" class="form-control" value="@Model.FromWhere" name="FromWhere" id="fromwhere" placeholder="şəhər əlavə edin">
+                         <ul class="form-control fromwhere" style="display:none"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haraya</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+                          <input type="text" class="form-control" value="@Model.ToWhere" name="ToWhere" id="where" placeholder="şəhər əlavə edin">
+                          <ul class="form-control where" style="display: none;"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Tarix</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		               
+		              <input type="date" id="Date" value="@ViewBag.Date" name="DepartureDate" class="form-control">
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Saat</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+										<select name="DepartureHour" id="" class="form-control">
+											<option value="@ViewBag.Hour">@ViewBag.Hour</option>
+										  <option value="08:00">08:00</option>
+										  <option value="09:00">09:00</option>
+										  <option value="10:00">10:00</option>
+										  <option value="11:00">11:00</option>
+										  <option value="12:00">12:00</option>
+										  <option value="13:00">13:00</option>
+										  <option value="14:00">14:00</option>
+										  <option value="15:00">15:00</option>
+										  <option value="16:00">16:00</option>
+										  <option value="17:00">17:00</option>
+										</select>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-self-end">
+		        				<div class="form-group">
+		        					<div class="form-field">
+										<button class="form-control btn btn-primary"> Axtarin</button>
+				              </div>
+			              </div>
+		        			</div>
+		        		</div>
+		        	</form>
+		        </div>
+					</div>
+	    	</div>
+          <div class="to-go-full-div">
+          <div class="to-go">
+            <div >
+                <label>Haradan</label>
+                <input type="text" class="form-control" id="fromWhere" value="@Model.FromWhere" disabled>
+            </div>
+            <div >
+                <label>Haraya</label>
+                <input type="text" class="form-control" id="toWhere" value="@Model.ToWhere" disabled>
+            </div>
+            <div >
+                <label>Tarix</label>
+                <input type="text" class="form-control" id="departureDate" value="@ViewBag.Date" disabled>
+            </div> 
+             <div >
+                <label>Saat</label>
+                <input type="text" class="form-control" id="departureHour" value="@ViewBag.Hour" disabled>
+            </div>
+            <div >
+              <h4 class="text-center m-2">Gediş Haqqı (<b id="price">@Model.Price</b>  azn)</h4>
+          </div>
+          <div class="bus-seat-full-empty">
+                <label class="bus-seat-full-label"><img src="~/icon/seat.png" alt="" class="seat-full"> Dolu yerlər  (<b>10</b>)</label>
+               
+                <label class="bus-seat-empty-label"><img src="~/icon/seat.png" alt="" class="seat-empty">  Boş yerlər  (<b>13</b>)</label>
+               
+            </div>
+            <div>
+              <h6 class="click-seat-div"><img src="~/icon/seat.png" class="seat-click"> Seçdiğiniz yer ( <b class="click-seat"></b> )</h6>
+            </div>
+            <div>
+              <h6 class="text-center"><label class="bus-seat-empty-label"><img src="~/icon/seat.png" class="seat-empty"> istədiğiniz yaşıl oturacağı seçə bilərsiniz!</label></h6>
+                <div class="bus-seat-div">
+                  <div class="bus-seat" id="bus-seat-1">
+              
+                  </div>
+                  <hr>
+                  <div class="bus-seat" id="bus-seat-2">
+                   
+                  </div>
+                  <div class="bus-seat" id="bus-seat-3">
+                   
+                  </div>
+                  <div class="bus-seat" id="bus-seat-4">
+                  
+                  </div>
+                  <div class="bus-seat" id="bus-seat-5">
+                  
+                  </div>
+                  <hr>
+                   <div class="bus-seat" id="bus-seat-6">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-7">
+                  
+                   </div>
+                  
+                   <div class="bus-seat" id="bus-seat-8">
+                   
+                   </div>
+                   <hr>
+                   <div class="bus-seat" id="bus-seat-9">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-10">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-11">
+                   
+                   </div>
+                   
+                   <div class="bus-seat" id="bus-seat-12">
+                  
+                   </div>
+                   <hr>
+                   <div class="bus-seat" id="bus-seat-13">
+                   
+                   </div>
+                   <div class="bus-seat" id="bus-seat-14">
+                   
+                   </div>
+                   <div class="bus-seat" id="bus-seat-15">
+                   
+                   </div>
+                  
+                   <div class="bus-seat" id="bus-seat-16">
+                  
+                   </div>
+                   <hr>
+                   <div class="bus-seat" id="bus-seat-17">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-18">
+                   
+                   </div>
+                   <div class="bus-seat" id="bus-seat-19">
+                  
+                   </div>
+                   
+                   <div class="bus-seat" id="bus-seat-20">
+                   
+                   </div>
+                   <hr>
+                   <div class="bus-seat" id="bus-seat-21">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-22">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-23">
+                  
+                   </div>
+                   <div class="bus-seat" id="bus-seat-24">
+                 
+                   </div>
+                </div>
+                
+            </div>
+            <div>
+                <button class="btn btn-primary to-go-next">İrəli</button>
+            </div>
+           </div>
+          <div class="to-go-personal-information">
+            <h4 class="text-center">Şəxsi Məlumatlar</h4>
+            <div >
+              <label>Ad</label>
+              <input type="text" id="name" class="form-control" >
+          </div>
+          <div >
+            <label>Soyad</label>
+            <input type="text" id="surname" class="form-control">
+        </div>
+        <div >
+          <label>Şəxsiyyət vəsiqə Nömrəsi</label>
+          <input type="text" id="identitynumber" class="form-control" placeholder="000000000" >
+      </div>
+      <div >
+        <label>Telefon Nömrəsi</label>
+        <input type="tel" id="phone" class="form-control" placeholder="070-000-00-00">
+    </div>
+    <div >
+      <label>Email</label>
+      <input type="email" id="email" class="form-control" >
+  </div>
+  <div >
+   <button class="btn btn-danger btnback">Geriyə dön</button> <button class="btn btn-info m-2 btnAdd" >Bileti Alın</button>
+</div>
+           </div>
+        </div>
+        <button class="modalclick" style="display:none;"></button>
+                <div class="modal fade" id="exampleModalCenter"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"></div>
+	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+		<script src="~/lib/jquery/dist/jquery.js"></script>		
+		<script type="text/javascript" src="~/js/bus-chek.js"></script>
+          <script src="~/js/to_go.js"></script>

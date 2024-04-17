@@ -1,0 +1,144 @@
+
+  .modal-body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #c7c5e4;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #1c1c1c;
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+ 
+    .top {
+      display: flex;
+      align-items: center;
+      flex-direction: column;}
+      .title {
+        font-weight: normal;
+        font-size: 1.6em;
+        text-align: left;
+        margin-left: 20px;
+        margin-bottom: 50px;
+        color: #fff;
+        
+      }
+      .printer {
+        width: 90%;
+        height: 20px;
+        border: 5px solid #fff;
+        border-radius: 10px;
+        box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2);
+      }
+    
+  
+    .receipts-wrapper {
+      overflow: hidden;
+      margin-top: -10px;
+      padding-bottom: 10px;
+    }
+  
+    .receipts {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      transform: translateY(-510px);
+  
+      animation-duration: 2.5s;
+      animation-delay: 500ms;
+      animation-name: print;
+      animation-fill-mode: forwards;
+  
+    }
+      .receipt {
+        padding: 25px 30px;
+        text-align: left;
+        min-height: 200px;
+        width: 88%;
+        background-color: #fff;
+        border-radius: 10px 10px 20px 20px;
+        box-shadow: 1px 3px 8px 3px rgba(0, 0, 0, 0.2);
+      }
+        .airliner-logo {
+            position: relative;
+            
+          max-width: 80px;
+          
+        }
+  
+        .route {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 30px 0;
+        }
+          .plane-icon {
+            width: 90px;
+            height: 40px;
+            
+          }
+          h2 {
+            font-weight: 300;
+            font-size: 2.2em;
+            margin: 0;
+          }
+        
+  
+        .details {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+          .item {
+            display: flex;
+            flex-direction: column;
+            min-width: 70px;
+          }
+            span {
+              font-size: .8em;
+              color: rgba(28, 28, 28, .7);
+              font-weight: 500;
+            }
+            h3 {
+              margin-top: 10px;
+              margin-bottom: 25px;
+            }
+          
+        
+  .receipt-footer{
+    display: inline-flex;
+  }
+       
+          
+          .description {
+            margin-left: 0px;
+            margin-left: 30px;
+          }
+            h2 {
+              margin: 0 0 5px 0;
+              font-weight: 500;
+              
+            }
+            p {
+              margin: 0;
+              font-weight: 400;
+            }
+    
+  @keyframes print {
+    0% {
+      transform: translateY(-510px)
+    }
+    35% {
+      transform: translateY(-395px);
+    }
+    70% {
+      transform: translateY(-140px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }

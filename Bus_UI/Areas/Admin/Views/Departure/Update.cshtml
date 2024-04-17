@@ -1,0 +1,25 @@
+﻿@model DeparturePriceView
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="text-center">Update</h4>
+<form asp-action="Update" asp-controller="Departure" asp-area="Admin" method="post">
+<div class="form-group">
+	<label>FromWhere</label>
+	<input type="text" class="form-control" name="FromWhere" value="@Model.FromWhere" readonly/>
+</div>
+<div class="form-group">
+	<label>ToWhere</label>
+	<input type="text" class="form-control" name="ToWhere" value="@Model.ToWhere" readonly/>
+</div>
+<div class="form-group">
+	<label>Price</label>
+	<input type="text" class="form-control btn btn-success" name="Price" value="@Model.Price" />
+</div>
+	<div class="form-group">
+		<button class="form-control btn btn-outline-info">Update</button>
+	</div>
+
+</form>

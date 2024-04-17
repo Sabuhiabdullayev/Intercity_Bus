@@ -1,0 +1,58 @@
+﻿@model DeparturePriceView
+@{
+    ViewData["Title"] = "CityUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/to-go.css">
+
+<h1>CityUpdate</h1>
+
+
+	<form asp-action="Add" asp-controller="Departure" asp-area="Admin" method="post">
+		        		<div class="row">
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haradan</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		                     <input type="text" class="form-control" value="@Model.FromWhere" name="FromWhere" id="fromwhere" placeholder="şəhər əlavə edin">
+                         <ul class="form-control fromwhere" style="display:none"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haraya</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+                          <input type="text" class="form-control" name="ToWhere" value="@Model.ToWhere" id="where" placeholder="şəhər əlavə edin">
+                          <ul class="form-control where" style="display: none;"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Gediş Haqqı</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		               
+		              <input type="number"  name="Price" class="form-control btn btn-danger" value="@Model.Price" readonly>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-self-end">
+		        				<div class="form-group">
+		        					<div class="form-field">
+										<button class="form-control btn btn-primary"> Axtarin</button>
+				              </div>
+			              </div>
+		        			</div>
+		        		</div>
+		        	</form>
+
+						<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+		<script src="~/lib/jquery/dist/jquery.js"></script>		
+          <script src="~/js/to_go.js"></script>

@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/to-go.css">
+
+<h4 class="text-center">List <p id="count"></p></h4>
+
+	<div class="row">
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haradan</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		                     <input type="text" class="form-control"  name="FromWhere" id="fromwhere" placeholder="şəhər əlavə edin">
+                         <ul class="form-control fromwhere" style="display:none"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Haraya</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+                          <input type="text" class="form-control" name="ToWhere" id="where" placeholder="şəhər əlavə edin">
+                          <ul class="form-control where" style="display: none;"></ul>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Tarix</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+		               
+		              <input type="date" id="date" name="DepartureDate" class="form-control">
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-items-end">
+		        				<div class="form-group">
+		        					<label for="#">Saat</label>
+		        					<div class="form-field">
+		          					<div class="select-wrap">
+										<select name="DepartureHour" id="hour" class="form-control">
+										  <option value="08:00">08:00</option>
+										  <option value="09:00">09:00</option>
+										  <option value="10:00">10:00</option>
+										  <option value="11:00">11:00</option>
+										  <option value="12:00">12:00</option>
+										  <option value="13:00">13:00</option>
+										  <option value="14:00">14:00</option>
+										  <option value="15:00">15:00</option>
+										  <option value="16:00">16:00</option>
+										  <option value="17:00">17:00</option>
+										</select>
+		                    </div>
+				              </div>
+			              </div>
+		        			</div>
+		        			<div class="col-lg align-self-end">
+		        				<div class="form-group">
+		        					<div class="form-field">
+										<button class="form-control btn btn-primary" id="btnlist"> Axtarin</button>
+				              </div>
+			              </div>
+		        			</div>
+		        		</div>
+				
+						<table class="table table-bordered" id="tbl_list"></table>
+	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+		<script src="~/lib/jquery/dist/jquery.js"></script>	
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#btnlist").click(function(){
+        let list = {
+            FromWhere: $("#fromwhere").val(),
+            ToWhere: $("#where").val(),
+            DepartureDate: $("#date").val(),
+            DepartureHour: $("#hour").val()
+        };
+        $.ajax({
+            type: "Get",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/Admin/Passenger/Search/",
+            data: list,
+            success: function(func){
+				$("#count").html(func.length);
+                // Clear existing content before appending new rows
+                $("#tbl_list").empty();
+                   $("#tbl_list").append(
+                    '<tr>'+
+                    '<th>#</th>'+
+                    '<th>FullName</th>'+
+                    '<th>Seat</th>'+
+                    '<th>Price</th>'+
+                    '<th>Email</th>'+
+                    '<th>Tel</th>'+
+                    '<th>PostingDate</th>'+
+                    '<th>GetId</th>'+
+                    '<th>Del</th>'+
+                    '</tr>'
+                );
+                $.each(func, function(index, value){
+                    $("#tbl_list").append(
+                        '<tr>'+
+                        '<td>'+value.id+'</td>'+
+                        '<td>'+value.fullName+'</td>'+
+                        '<td>'+value.seat+'</td>'+
+                        '<td>'+value.price+'</td>'+
+                        '<td>'+value.email+'</td>'+
+                        '<td>'+value.phone+'</td>'+
+                        '<td>'+value.postingDate+'</td>'+
+                        '<td><a href="/Admin/Passenger/GetId/'+value.id+'" class="btn btn-outline-info">Get</a></td>'+
+                        '<td><button class="btn btn-danger del" data-id="'+value.id+'">Del</button></td>'+
+                        '</tr>' );
+						
+                });
+				$("#tbl_list").on("click",".del",function(){
+							var btn =$(this);
+							var id=btn.data("id");
+							let Data={
+								id:id
+							};
+							$.ajax({
+								type:"post",
+								url:"/Admin/Passenger/Delete/",
+								data:Data,
+								success:function(func){
+									btn.parent().parent().remove();
+								}
+							});
+						});
+            }
+        });
+    });
+});
+
+</script>
+		          <script src="~/js/to_go.js"></script>
